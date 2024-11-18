@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contoh var, let, dan const</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        pre {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ddd;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Contoh var, let, dan const</h1>
+    <button onclick="runVarExample()">Coba `var`</button>
+    <button onclick="runLetExample()">Coba `let`</button>
+    <button onclick="runConstExample()">Coba `const`</button>
+    <h3>Output:</h3>
+    <pre id="output">Klik tombol untuk melihat hasil</pre>
+
+    <script>
+        function runVarExample() {
+            let output = "Contoh `var`:\n";
+            if (true) {
+                var x = 10; // Deklarasi di dalam blok
+                output += `- Dalam blok: x = ${x}\n`;
+            }
+            output += `- Di luar blok: x = ${x}\n`; // Masih bisa diakses
+            document.getElementById("output").innerText = output;
+        }
+
+        function runLetExample() {
+            let output = "Contoh `let`:\n";
+            if (true) {
+                let y = 20; // Deklarasi di dalam blok
+                output += `- Dalam blok: y = ${y}\n`;
+            }
+            try {
+                output += `- Di luar blok: y = ${y}\n`; // Error, y tidak terdefinisi di luar blok
+            } catch (error) {
+                output += `- Di luar blok: Error (${error.message})\n`;
+            }
+            document.getElementById("output").innerText = output;
+        }
+
+        function runConstExample() {
+            let output = "Contoh `const`:\n";
+            const z = 30; // Deklarasi konstanta
+            output += `- Nilai awal: z = ${z}\n`;
+            try {
+                z = 40; // Error, z tidak dapat diubah
+            } catch (error) {
+                output += `- Setelah mencoba ubah: Error (${error.message})\n`;
+            }
+            document.getElementById("output").innerText = output;
+        }
+    </script>
+</body>
+</html>
