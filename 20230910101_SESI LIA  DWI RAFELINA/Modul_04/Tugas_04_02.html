@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAFTAR ALUMNI</title>
+    <link rel="stylesheet" href="stylesheet_04_02.css"/>
+</head>
+<body>
+    <h1>DAFTAR ALUMNI</h1>
+    <div class="search-container">
+        <input
+        type="text"
+        id="searchInput"
+        placeholder="Cari berdasarkan nama atau jurusan..."
+        onkeyup="filterAlumni()"
+        />
+    </div>
+    <table id="alumniTable">
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Jurusan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Sesilia Dwi Rafelina</td>
+                <td>Sistem Informasi</td>
+            </tr>
+            <tr>
+                <td>Xenia Tri Agistia</td>
+                <td>Teknik Informatika</td>
+            </tr>
+            <tr>
+                <td>Pasha Apriliani</td>
+                <td>Desain Komunikasi Visual</td>
+            </tr>
+            <tr>
+                <td>Irma Nur Aisah</td>
+                <td>Manajemen Informatika</td>
+            </tr>
+            <tr>
+                <td>Syafani Dwina Riandini</td>
+                <td>Teknik Sipil</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        function filterAlumni() {
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById("alumniTable");
+            const tr = table.getElementsByTagName("tr"); // Perbaikan pada nama fungsi
+            
+            for (let i = 1; i < tr.length; i++) { // Mulai dari 1 untuk melewati header tabel
+                const tdName = tr[i].getElementsByTagName('td')[0];
+                const tdMajor = tr[i].getElementsByTagName('td')[1];
+                
+                if (tdName || tdMajor) {
+                    const nameValue = tdName.textContent || tdName.innerText;
+                    const majorValue = tdMajor.textContent || tdMajor.innerText;
+                    
+                    if (
+                        nameValue.toLowerCase().indexOf(filter) > -1 ||
+                        majorValue.toLowerCase().indexOf(filter) > -1
+                    ) {
+                        tr[i].style.display = ''; // Tampilkan baris
+                    } else {
+                        tr[i].style.display = 'none'; // Sembunyikan baris
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
