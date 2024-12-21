@@ -3,63 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contoh var, let, dan const</title>
+    <title>Perbedaan Scope: var, let, dan const</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
         }
-        pre {
-            background-color: #f9f9f9;
+        .output {
+            margin-top: 20px;
             padding: 10px;
-            border: 1px solid #ddd;
-            overflow: auto;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
         }
     </style>
 </head>
 <body>
-    <h1>Contoh var, let, dan const</h1>
-    <button onclick="runVarExample()">Coba `var`</button>
-    <button onclick="runLetExample()">Coba `let`</button>
-    <button onclick="runConstExample()">Coba `const`</button>
-    <h3>Output:</h3>
-    <pre id="output">Klik tombol untuk melihat hasil</pre>
+    <h1>Perbedaan Scope: var, let, dan const</h1>
+    <button onclick="testVar()">Tes Var</button>
+    <button onclick="testLetConst()">Tes Let & Const</button>
+
+    <div class="output" id="output">
+        <strong>Output:</strong>
+        <div id="result"></div>
+    </div>
 
     <script>
-        function runVarExample() {
-            let output = "Contoh `var`:\n";
-            if (true) {
-                var x = 10; // Deklarasi di dalam blok
-                output += `- Dalam blok: x = ${x}\n`;
-            }
-            output += `- Di luar blok: x = ${x}\n`; // Masih bisa diakses
-            document.getElementById("output").innerText = output;
+        // Fungsi untuk menampilkan hasil di layar
+        function displayOutput(message) {
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML += `<p>${message}</p>`;
         }
 
-        function runLetExample() {
-            let output = "Contoh `let`:\n";
+        // Contoh penggunaan var
+        function testVar() {
             if (true) {
-                let y = 20; // Deklarasi di dalam blok
-                output += `- Dalam blok: y = ${y}\n`;
+                var x = "Ini var"; // Function scope
             }
-            try {
-                output += `- Di luar blok: y = ${y}\n`; // Error, y tidak terdefinisi di luar blok
-            } catch (error) {
-                output += `- Di luar blok: Error (${error.message})\n`;
-            }
-            document.getElementById("output").innerText = output;
+            displayOutput("Variabel var di luar blok: " + x); // Output ke layar
         }
 
-        function runConstExample() {
-            let output = "Contoh `const`:\n";
-            const z = 30; // Deklarasi konstanta
-            output += `- Nilai awal: z = ${z}\n`;
-            try {
-                z = 40; // Error, z tidak dapat diubah
-            } catch (error) {
-                output += `- Setelah mencoba ubah: Error (${error.message})\n`;
+        // Contoh penggunaan let dan const
+        function testLetConst() {
+            if (true) {
+                let y = "Ini let"; // Block scope
+                const z = "Ini const"; // Block scope
+                displayOutput("Variabel let di dalam blok: " + y); // Output ke layar
+                displayOutput("Variabel const di dalam blok: " + z); // Output ke layar
             }
-            document.getElementById("output").innerText = output;
+
+            try {
+                // Mengakses let di luar blok (akan error)
+                displayOutput("Variabel let di luar blok: " + y);
+            } catch (error) {
+                displayOutput("Error akses let di luar blok: " + error.message);
+            }
+
+            try {
+                // Mengakses const di luar blok (akan error)
+                displayOutput("Variabel const di luar blok: " + z);
+            } catch (error) {
+                displayOutput("Error akses const di luar blok: " + error.message);
+            }
         }
     </script>
 </body>
