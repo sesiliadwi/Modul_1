@@ -1,0 +1,17 @@
+<?php
+include 'latihan_09_config.php';
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id']; 
+    $sql = "DELETE FROM alumni WHERE id=$id";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Data berhasil dihapus";
+        header("Location: Latihan_09_index.php?menu=alumni"); 
+        exit(); // Pastikan untuk menghentikan eksekusi lebih lanjut setelah header
+    } else {
+        echo "Error deleting record: " . $conn->error;
+    }
+    $conn->close();
+}
+?>
